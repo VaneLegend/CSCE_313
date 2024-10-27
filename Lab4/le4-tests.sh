@@ -31,11 +31,14 @@ echo -e "  ${GREEN}Test One Passed${NC}"
 
 remake
 echo -e "\nTesting :: Memory Leakage\n"
-if ./MasterChef -i test-files/NoDep.csv 2>/dev/null 1>/dev/null; then
+
+valgrind --leak-check=full --error-exitcode=1 ./MasterChef -i test-files/NoDep.csv 2> valgrind_output.log 1>/dev/null
+
+if grep -q "definitely lost" valgrind_output.log; then
+    echo -e "  ${RED}Memory Leak Detected - Failed${NC}"
+else
     echo -e "  ${GREEN}Test Two Passed${NC}"
     SCORE=$(($SCORE+5))
-else
-    echo -e "  ${RED}Failed${NC}"
 fi
 
 remake
