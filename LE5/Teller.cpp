@@ -76,9 +76,8 @@ int main(int argc, char* argv[])
         std::vector<std::thread> t_vec;
         const timepoint          start2 = std::chrono::steady_clock::now();
         // TODO #3: create *num_trans* threads and push_back() each one to t_vec
-        for(int i = 0; i < num_trans; i++) {
-                std::thread t(teller_thread, &B, trans_arr[i]);;
-                t_vec.push_back(t);
+        for(unsigned int i = 0; i < num_trans; i++) {
+                t_vec.emplace_back(teller_thread, &B, trans_arr[i]);
         }
         for(std::thread& t: t_vec) t.join();
         const timepoint end2 = std::chrono::steady_clock::now();
@@ -90,9 +89,8 @@ int main(int argc, char* argv[])
         std::vector<std::thread> t_vec2;
         const timepoint          start3 = std::chrono::steady_clock::now();
         // TODO #4: create *num_trans* threads and push_back() each one to t_vec2
-        for(int i = 0; i < num_trans; i++) {
-                std::thread t(teller_threadsafe, &C, trans_arr[i]);
-                t_vec2.push_back(std::move(t));
+        for(unsigned int i = 0; i < num_trans; i++) {
+                t_vec2.emplace_back(teller_threadsafe, &C, trans_arr[i]);
         }
         // TODO #5: join all threads in t_vec2
         for(std::thread& t: t_vec2) t.join();
