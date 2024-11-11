@@ -1,0 +1,17 @@
+In this assignment, you are tasked with implementing a thread pool that efficiently manages tasks across a fixed number of threads. Each thread should continuously fetch tasks from a queue and execute them, waiting for new tasks when the queue is empty.
+
+This is a simplified version of a thread pool. Therefore, you are only required to implement the following functions: void SubmitTask(const std::string &name, Task *task), void run_thread(), and void Stop().
+
+If you finish the code, you may run make clean and ./pool-test-tsan to see if there are any race conditions.
+
+Please consider the following key questions as you develop your solution:
+1. How does a fixed set of threads continuously find and retrieve new tasks added to the thread pool?
+2. How should these threads idle when there are no tasks available and then resume when new tasks are introduced?
+3. How do we ensure that when a caller stops the thread pool, no new tasks are added, currently executing tasks are allowed to complete, all threads are properly joined, and resources are cleaned up effectively?
+
+## You are not required to submit your code for this task. However, it is crucial that you understand how to implement a thread pool correctly.
+
+Important Notices:
+
+1. We have a Q&A section in the second section of this week dedicated to this assignment, where you can raise any queries related to the task.
+2. There will be a quiz concerning this assignment in the first section of next week (e.g., November 18 or November 19). The quiz will last approximately 10 to 20 minutes, and you will be asked to answer several questions. Please ensure you attend the lab session.
